@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="148.849" height="34.178" viewBox="0 0 148.849 34.178">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#8b3434"/>
+      <stop offset="1" stop-color="#c69048"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_117" data-name="Group 117" transform="translate(-329.151 -10)">
+    <text id="Marhaba" transform="translate(364 35)" fill="#c69048" font-size="24" font-family="Poppins-Bold, Poppins" font-weight="700"><tspan x="0" y="0">Marhaba</tspan></text>
+    <g id="Rectangle_2" data-name="Rectangle 2" transform="translate(346.222 10.889) rotate(45)" stroke="#fff" stroke-width="1" fill="url(#linear-gradient)">
+      <rect width="22.935" height="24.142" rx="6" stroke="none"/>
+      <rect x="0.5" y="0.5" width="21.935" height="23.142" rx="5.5" fill="none"/>
+    </g>
+  </g>
+</svg>
