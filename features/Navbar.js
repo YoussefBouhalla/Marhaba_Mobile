@@ -37,7 +37,7 @@ export default function Navbar({slides, currentSlideIndex, goToSlide, setCurrent
 
             <View style={styles.bot_navbar} >
                 {slides.map((_,index) => (
-                    <Pressable onPress={changeNavigation(index)} style={{...styles.navbar_item , borderBottomWidth: currentSlideIndex === index ? 3 : 0}} >
+                    <Pressable key={index} onPress={changeNavigation(index)} style={{...styles.navbar_item , borderBottomWidth: currentSlideIndex === index ? 3 : 0 , backgroundColor: currentSlideIndex === index ? '#a9a9a911' : 'transparent'}} >
                         {
                             index === 0 ?
                                 <HomeIcon/> :
@@ -83,12 +83,13 @@ const styles = StyleSheet.create({
     bot_navbar: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 20
+        marginTop: 10
     },
     navbar_item: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        paddingTop: 10,
         paddingBottom: 10,
         borderBottomColor: '#C69048',
     }
