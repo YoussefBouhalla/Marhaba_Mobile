@@ -8,20 +8,20 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <View style={styles.container}>
-        <Stack.Navigator>
-            <Stack.Screen name="Authentication" component={Authentication} options={{headerShown: false}} /> 
-            <Stack.Screen name="Home" component={Home} options={{headerShown: false}} /> 
-        </Stack.Navigator>
-      </View>
-    </NavigationContainer>
+      <NavigationContainer>
+        <View style={styles.container}>
+          <Stack.Navigator>
+              <Stack.Screen name="Authentication" component={Authentication} options={{headerShown: false}} /> 
+              <Stack.Screen name="Home" component={Home} options={{headerShown: false}} /> 
+          </Stack.Navigator>
+        </View>
+      </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    backgroundColor: '#fff',
+    backgroundColor: '#F8F4F1',
   },
 });
