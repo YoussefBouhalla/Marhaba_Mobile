@@ -1,11 +1,11 @@
 import { useState, useRef } from 'react'
 import { StyleSheet, View, FlatList, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
-import Navbar from '../features/Navbar';
+import Navbar from '../features/Globals/Navbar';
 import Home from '../features/Slides/Home';
 import Meals from '../features/Slides/Meals';
 import Profile from '../features/Slides/Profile';
-import Slider from '../features/Slider';
+import Slider from '../features/Globals/Slider';
 
 const {width, height} = Dimensions.get('window');
 
@@ -20,6 +20,10 @@ const slides = [
     },
     {
         id:3,
+        component: Profile
+    },
+    {
+        id:4,
         component: Profile
     }
 ]

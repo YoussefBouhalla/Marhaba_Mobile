@@ -1,11 +1,10 @@
 import { StyleSheet, View, Text } from 'react-native';
-import { useFonts } from 'expo-font';
 
-export default function Slider({Component}) {
+export default function ProgressBar() {
     
     return (
-        <View>
-            <Component />
+        <View>    
+            <Text>Home</Text>    
         </View>
     );
 

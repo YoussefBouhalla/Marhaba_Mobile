@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { StyleSheet, View, Pressable } from 'react-native';
 import { useFonts } from 'expo-font';
-import LogoLong from '../assets/icons/logoLong.svg';
-import SearchIcon from '../assets/icons/search.svg';
-import ProfileIcon from '../assets/icons/profile.svg';
-import HomeIcon from '../assets/icons/home.svg';
-import BasketIcon from '../assets/icons/basket.svg';
+import LogoLong from '../../assets/icons/logoLong.svg';
+import SearchIcon from '../../assets/icons/search.svg';
+import ProfileIcon from '../../assets/icons/profile.svg';
+import HomeIcon from '../../assets/icons/home.svg';
+import BasketIcon from '../../assets/icons/basket.svg';
+import CartIcon from '../../assets/icons/cart.svg';
 
 
 export default function Navbar({slides, currentSlideIndex, goToSlide, setCurrentSlideIndex}) {
@@ -19,7 +20,7 @@ export default function Navbar({slides, currentSlideIndex, goToSlide, setCurrent
     }
     // loading Poppins fonts
     const [loaded] = useFonts({
-        'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
+        'Poppins-Bold': require('../../assets/fonts/Poppins-Bold.ttf'),
     });
 
     if (!loaded) {
@@ -27,13 +28,14 @@ export default function Navbar({slides, currentSlideIndex, goToSlide, setCurrent
     }
     
     return (
-        <View style={styles.navbar}>    
-            <View style={styles.top_navbar}>
+        <View style={styles.navbar}>  
+
+            {/* <View style={styles.top_navbar}>
                 <LogoLong />
                 <View style={styles.search_icon} >
                     <SearchIcon />
                 </View>
-            </View>
+            </View> */}
 
             <View style={styles.bot_navbar} >
                 {slides.map((_,index) => (
@@ -42,8 +44,10 @@ export default function Navbar({slides, currentSlideIndex, goToSlide, setCurrent
                             index === 0 ?
                                 <HomeIcon/> :
                             index === 1 ?
-                                <BasketIcon/>
-                            : <ProfileIcon/>
+                                <BasketIcon/> :
+                            index === 2 ?
+                                <ProfileIcon/> 
+                            :   <CartIcon />
                         }
                     </Pressable>
                 ))}
