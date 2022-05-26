@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react'
-import { StyleSheet, View, FlatList, Dimensions } from 'react-native';
+import { useState, useRef , useEffect } from 'react'
+import { StyleSheet, View, FlatList, Dimensions, BackHandler, Alert } from 'react-native';
 import { useFonts } from 'expo-font';
 import Navbar from '../features/Globals/Navbar';
 import Home from '../features/Slides/Home';
@@ -28,10 +28,29 @@ const slides = [
     }
 ]
 
-export default function Auhentication() {
+export default function HomePage({navigation}) {
 
     const ref = useRef(null)
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
+
+    const backAction = () => {
+        Alert.alert("Discard changes?", "Are you sure you want to exit?", [
+          {
+            text: "NO",
+            onPress: () => null,
+            style: "cancel"
+          },
+          { text: "YES", onPress: () => BackHandler.exitApp() }
+        ]);
+        return true;
+    };
+
+    useEffect(() => {
+        BackHandler.addEventListener("hardwareBackPress", backAction);
+        return () => {
+            BackHandler.removeEventListener("hardwareBackPress", backAction);
+        }   
+    }, []);
 
     const updatecurrentSlideIndex = (e) => {
         const contentOffsetX = e.nativeEvent.contentOffset.x;
@@ -63,7 +82,7 @@ export default function Auhentication() {
                 data={slides}
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                renderItem={({item}) => ( <Slider Component={item.component}  /> )}
+                renderItem={({item}) => ( <Slider Component={item.component} navigation={navigation}  /> )}
             />
         </View>
     );
