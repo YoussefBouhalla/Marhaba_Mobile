@@ -1,9 +1,9 @@
-import { StyleSheet, View, Text, ImageBackground, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, Pressable } from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
 
 import { useFonts } from 'expo-font';
 
-export default function Item({meal, index, length}) {
+export default function Item({meal, index, length, onPress}) {
 
     // loading Poppins fonts
     const [loaded] = useFonts({
@@ -16,7 +16,7 @@ export default function Item({meal, index, length}) {
     }
     
     return (
-        <View style={{...styles.card, marginTop: index === 0 ? 0 : 15, marginBottom: index === length -1 ? 15 : 0}}>
+        <Pressable style={{...styles.card, marginTop: index === 0 ? 0 : 15, marginBottom: index === length -1 ? 15 : 0}} onPress={onPress}>
             <LinearGradient colors={['transparent', '#000000ac']} style={styles.cover_gradient}>
             </LinearGradient>
                 <ImageBackground source={{uri: `http://192.168.137.1:4000/meals/${meal.meal_id}` }} style={styles.card_image} />
@@ -28,7 +28,7 @@ export default function Item({meal, index, length}) {
                     <Text style={{...styles.card_title}} >{meal.price}$</Text>
                 </View>
                 <Text style={styles.card_description} >{meal.description}</Text>
-        </View>
+        </Pressable>
     );
 
 }
