@@ -1,10 +1,10 @@
 import { StyleSheet, View, Text } from 'react-native';
 
-export default function Slider({Component}) {
+export default function Slider({Component, navigation}) {
     
     return (
         <View>
-            <Component />
+            <Component navigation={navigation} />
         </View>
     );
 
