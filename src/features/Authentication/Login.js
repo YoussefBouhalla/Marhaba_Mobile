@@ -1,9 +1,40 @@
-import { StyleSheet, Text, TextInput, Pressable, View } from 'react-native';
+import {useState, useEffect} from 'react';
+import { StyleSheet, Text, TextInput, Pressable, View, ScrollView } from 'react-native';
 import { useFonts } from 'expo-font';
+import * as SecureStore from 'expo-secure-store'
 import UserIcon from '../../assets/icons/profile.svg';
+import { Login } from '../../services/UserServices';
 import KeyHoleIcon from '../../assets/icons/keyhole.svg';
+import { loginAction } from '../../actions/AuthActions';
 
-export default function Login({setFragment, navigation}) {
+export default function LoginFragment({setFragment, navigation}) {
+
+    const [data, setData] = useState({email: "" , password: ""});
+    const [error, setError] = useState({email: null , password: null});
+
+    const handleLogin = () => {
+        Login(data).then(res => {
+            if (res.data.email) {
+                setError({password : "", email: res.data.email})
+            }else if (res.data.password) {
+                setError({email : "", password: res.data.password})
+            } else {
+                (async () => {
+                    await SecureStore.setItemAsync('token' , res.data.accessToken )
+                    navigation.navigate('Home')
+                })()
+            }
+        })
+    }
+
+    const handleEmail = (email) => {
+        setData({...data, email})
+    }
+
+    const handlePassword = (password) => {
+        setData({...data, password})
+    }
+    
 
     // loading Poppins fonts
     const [loaded] = useFonts({
@@ -19,38 +50,44 @@ export default function Login({setFragment, navigation}) {
     return (
         <View style={styles.login}>
             
-
             <View style={{display: "flex" , flexDirection: 'column'}}>
                 <Text style={styles.title} >login to your account !</Text>
-
-                <View style={styles.input_holder}>
-                    <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
-                        <UserIcon/>
+                <ScrollView showsVerticalScrollIndicator={false}> 
+                    <View>
+                        <View style={styles.input_holder}>
+                            <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
+                                <UserIcon/>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={handleEmail}
+                                placeholder='Email'
+                            />
+                        </View>
+                        <Text style={{...styles.error_text, display: error.email ? 'flex' : 'none'}}>error hna error !</Text> 
                     </View>
-                    <TextInput
-                        style={styles.input}
-                        // onChangeText={}
-                        placeholder='Email'
-                    />
-                </View>
 
-                <View style={styles.input_holder}>
-                    <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
-                        <KeyHoleIcon/>
+                    <View>
+                        <View style={styles.input_holder}>
+                            <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
+                                <KeyHoleIcon/>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={handlePassword}
+                                placeholder='password'
+                                secureTextEntry={true}
+                            />
+                        </View>
+                        <Text style={{...styles.error_text, display: error.password ? 'flex' : 'none'}}>error hna error !</Text>
                     </View>
-                    <TextInput
-                        style={styles.input}
-                        // onChangeText={}
-                        placeholder='password'
-                        secureTextEntry={true}
-                    />
-                </View>
-                
-                <Pressable  style={styles.btn_login} onPress={() => { navigation.navigate('Home') }} >
-                    <Text style={styles.btn_text} >Login</Text>
-                </Pressable>
+                    
+                    <Pressable  style={styles.btn_login} onPress={handleLogin} >
+                        <Text style={styles.btn_text} >Login</Text>
+                    </Pressable>
 
-                <Text style={styles.bottom_text} >You don't have an account ? <Text style={styles.register_link_text} onPress={() => { setFragment('register') }}>Create Now!</Text></Text>
+                    <Text style={styles.bottom_text} >You don't have an account ? <Text style={styles.register_link_text} onPress={() => { setFragment('register') }}>Create Now!</Text></Text>
+                </ScrollView>
             </View>
             
         </View>
@@ -130,5 +167,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-SemiBold',
         color: '#C69048',
         marginLeft: 5
+    },
+    error_text: {
+        fontFamily: 'Poppins-Medium',
+        fontSize: 14,
+        paddingTop: 5,
+        color: '#bd1a1a'
     }
 });
