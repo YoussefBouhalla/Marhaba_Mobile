@@ -1,8 +1,7 @@
-import { StyleSheet, View, Text,  Dimensions } from 'react-native';
+import { StyleSheet, View, Text,  Pressable } from 'react-native';
 import { useFonts } from 'expo-font';
-import LocationIcon from '../../assets/icons/location.svg'
 
-export default function CommandCard() {
+export default function CommandCard({onPress}) {
 
     // loading Poppins fonts
     const [loaded] = useFonts({
@@ -15,14 +14,14 @@ export default function CommandCard() {
     }
     
     return (
-        <View style={styles.commands_list_item}>
+        <Pressable style={styles.commands_list_item} onPress={onPress}>
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                 <Text style={{...styles.title, marginTop: 0, marginLeft: 0}}>Command N° 1</Text>
                 <Text style={{...styles.title, marginTop: 0, marginLeft: 0, ...styles.price_tag}}>13$</Text>
             </View>
 
             <Text style={styles.command_text}>2x Pizza Pepperoni - 3x caesar salad</Text>
-        </View>
+        </Pressable>
     );
 
 }
