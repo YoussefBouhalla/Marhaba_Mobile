@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { StyleSheet, Text,Image, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import * as SecureStore from 'expo-secure-store';
 import Logo from '../assets/icons/logo.svg'
 import { useFonts } from 'expo-font';
 import Login from '../features/Authentication/Login';
@@ -7,6 +9,16 @@ import Register from '../features/Authentication/Register';
 export default function Auhentication({ navigation }) {
 
     const [fragment, setFragment] = useState('login')
+
+    useEffect(() => {
+        const result = SecureStore.getItemAsync('token');
+        result.then(token => {
+            if (token != null) {
+                navigation.navigate('Home')
+            }
+        })
+    }, [])
+    
 
     // loading Poppins fonts
     const [loaded] = useFonts({
@@ -19,6 +31,7 @@ export default function Auhentication({ navigation }) {
 
     return (
         <View style={styles.auth}>
+            <StatusBar style='light' />
             <View style={styles.auth_top}>
                 <Image style={styles.auth_top_background} source={require('../assets/background.png')} />
                 <Logo />
