@@ -7,7 +7,7 @@ import MealsSearch from '../Search/MealsSearch';
 
 const {width} = Dimensions.get('window')
 
-export default function Meals() {
+export default function Meals({navigation}) {
     
     // loading Poppins fonts
     const [loaded] = useFonts({
@@ -24,7 +24,7 @@ export default function Meals() {
             {/* Search Section */}
             <MealsSearch />
             {/* Scrollable Section */}
-            <List />
+            <List navigation={navigation} />
         </View>
     );
 

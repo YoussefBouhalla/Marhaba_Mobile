@@ -7,8 +7,7 @@ import MoreIcon from '../../assets/icons/more.svg';
 import EditSmallIcon from '../../assets/icons/editSmall.svg';
 import BasketSmallIcon from '../../assets/icons/basketSmall.svg';
 import BottomSheet,{ BottomSheetView } from '@gorhom/bottom-sheet';
-import ProgressBar from '../UI/ProgressBar';
-
+import CommandStatus from '../Sheets/CommandStatus';
 const {width , height} = Dimensions.get('window')
 
 export default function Profile() {
@@ -18,8 +17,6 @@ export default function Profile() {
     const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
 
     const sheetRef = useRef(null);
-
-    const snapPoints = [ 1 , 300  ];
 
     // loading Poppins fonts
     const [loaded] = useFonts({
@@ -35,9 +32,14 @@ export default function Profile() {
         }
     }
 
-    const handleBottomSheet = useCallback((index) => {
+    const handleCommandBottomSheet = useCallback((index) => {
         sheetRef.current?.snapToIndex(index);
         setIsBottomSheetOpen(true);
+    }, [])
+
+    const handleCommandBottomSheetClose = useCallback((index) => {
+        sheetRef.current?.snapToIndex(index);
+        setIsBottomSheetOpen(false);
     }, [])
 
     if (!loaded) {
@@ -96,22 +98,28 @@ export default function Profile() {
                     
                     {/* list */}
                     <View style={styles.commands_list}>
-                        <CommandCard />
-                        <CommandCard />
-                        <CommandCard />
-                        <CommandCard />
+                        <CommandCard onPress={() => handleCommandBottomSheet(1)} />
+                        <CommandCard onPress={() => handleCommandBottomSheet(1)} />
+                        <CommandCard onPress={() => handleCommandBottomSheet(1)} />
+                        <CommandCard onPress={() => handleCommandBottomSheet(1)} />
                     </View>
                 </View>
             </ScrollView>
 
+            { isBottomSheetOpen &&
+            <Pressable style={styles.sheet_background} onPress={() => handleCommandBottomSheetClose(0)}>
+            
+            </Pressable>
+            }
+
             <BottomSheet
                 ref={sheetRef}
-                snapPoints={snapPoints}
+                snapPoints={[ 1 , 300  ]}
                 enablePanDownToClose
                 onClose={() => setIsBottomSheetOpen(false) }
             >
                 <BottomSheetView>
-                    <ProgressBar />
+                    <CommandStatus />
                 </BottomSheetView>
             </BottomSheet>
         </>
@@ -243,5 +251,13 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         width: 100,
         height: "100%",
+    },
+    sheet_background : {
+        width,
+        height,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        backgroundColor: "#0707078d"
     }
 });
