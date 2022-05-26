@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
 import { useFonts } from 'expo-font';
 import SearchIcon from '../../assets/icons/searchColored.svg';
@@ -7,6 +8,8 @@ import FilterIcon from '../../assets/icons/filter.svg';
 
 export default function MealsSearch() {
     
+    const [type, setType] = useState(null)
+
     // loading Poppins fonts
     const [loaded] = useFonts({
         'Poppins-Medium': require('../../assets/fonts/Poppins-Medium.ttf'),
@@ -37,16 +40,16 @@ export default function MealsSearch() {
                     <FilterIcon />
                 </View>
 
-                <Pressable style={{...styles.filter_button, marginRight: 0 , backgroundColor: "#a9a9a911"}}>
-                    <Text style={{...styles.filter_text, color: "#000"}}>Starters</Text>
+                <Pressable style={{...styles.filter_button, marginRight: 0 , backgroundColor: type === 'starter' ? "#C69048" : "#a9a9a911"}} onPress={() => setType('starter')} >
+                    <Text style={{...styles.filter_text, color: type === 'starter' ? "#fff" : "#000"}}>Starters</Text>
                 </Pressable>
 
-                <Pressable style={{...styles.filter_button, backgroundColor: "#C69048"}}>
-                    <Text style={{...styles.filter_text, color: "#fff"}}>Mains</Text>
+                <Pressable style={{...styles.filter_button, backgroundColor: type === 'main' ? "#C69048" : "#a9a9a911"}} onPress={() => setType('main')}>
+                    <Text style={{...styles.filter_text, color: type === 'main' ? "#fff" : "#000"}}>Mains</Text>
                 </Pressable>
 
-                <Pressable style={{...styles.filter_button, marginLeft: 0,marginRight: 0 , backgroundColor: "#a9a9a911"}}>
-                    <Text style={{...styles.filter_text , color: "#000"}}>Desserts</Text>
+                <Pressable style={{...styles.filter_button, marginLeft: 0,marginRight: 0 , backgroundColor: type === 'dessert' ? "#C69048" : "#a9a9a911"}} onPress={() => setType('dessert')}>
+                    <Text style={{...styles.filter_text , color: type === 'dessert' ? "#fff" : "#000"}}>Desserts</Text>
                 </Pressable>
                 
             </View>
