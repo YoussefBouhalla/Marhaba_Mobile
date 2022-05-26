@@ -1,9 +1,11 @@
-import { StyleSheet, Text, TextInput, Pressable, View } from 'react-native';
+import { StyleSheet, Text, TextInput, Pressable, View, ScrollView, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 import UserIcon from '../../assets/icons/profile.svg';
 import KeyHoleIcon from '../../assets/icons/keyhole.svg';
 
+const {width, height} = Dimensions.get('screen');
 export default function Register({setFragment}) {
+
 
 
     // loading Poppins fonts
@@ -18,83 +20,102 @@ export default function Register({setFragment}) {
     return (
         <View style={styles.register}>
             
-
             <View style={{display: "flex" , flexDirection: 'column'}}>
                 <Text style={styles.title} >create an account !</Text>
 
-                <View style={styles.input_holder}>
-                    <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
-                        <UserIcon/>
+                <ScrollView style={{ height: height - 300}} showsVerticalScrollIndicator={false}>
+                    <View>
+                        <View style={styles.input_holder}>
+                            <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
+                                <UserIcon/>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                // onChangeText={}
+                                placeholder='Username'
+                            />
+                        </View>
+                        <Text style={{...styles.error_text, display: 'flex'}}>error hna error !</Text>
                     </View>
-                    <TextInput
-                        style={styles.input}
-                        // onChangeText={}
-                        placeholder='Username'
-                    />
-                </View>
 
-                <View style={styles.input_holder}>
-                    <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
-                        <UserIcon/>
+                    <View>
+                        <View style={styles.input_holder}>
+                            <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
+                                <UserIcon/>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                // onChangeText={}
+                                placeholder='Email'
+                            />
+                        </View>
+                        <Text style={{...styles.error_text, display: 'flex'}}>error hna error !</Text>
                     </View>
-                    <TextInput
-                        style={styles.input}
-                        // onChangeText={}
-                        placeholder='Email'
-                    />
-                </View>
 
-                <View style={styles.input_holder}>
-                    <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
-                        <KeyHoleIcon/>
+                    <View>
+                        <View style={styles.input_holder}>
+                            <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
+                                <KeyHoleIcon/>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                // onChangeText={}
+                                placeholder='Password'
+                                secureTextEntry={true}
+                            />
+                        </View>
+                        <Text style={{...styles.error_text, display: 'flex'}}>error hna error !</Text>
                     </View>
-                    <TextInput
-                        style={styles.input}
-                        // onChangeText={}
-                        placeholder='Password'
-                        secureTextEntry={true}
-                    />
-                </View>
 
-                <View style={styles.input_holder}>
-                    <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
-                        <KeyHoleIcon/>
+                    <View>
+                        <View style={styles.input_holder}>
+                            <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
+                                <KeyHoleIcon/>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                // onChangeText={}
+                                placeholder='Repeat password'
+                                secureTextEntry={true}
+                            />
+                        </View>
+                        <Text style={{...styles.error_text, display: 'flex'}}>error hna error !</Text>
                     </View>
-                    <TextInput
-                        style={styles.input}
-                        // onChangeText={}
-                        placeholder='Repeat password'
-                        secureTextEntry={true}
-                    />
-                </View>
 
-                <View style={styles.input_holder}>
-                    <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
-                        <UserIcon/>
+                    <View>
+                        <View style={styles.input_holder}>
+                            <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
+                                <UserIcon/>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                // onChangeText={}
+                                placeholder='Phone'
+                            />
+                        </View>
+                        <Text style={{...styles.error_text, display: 'flex'}}>error hna error !</Text>
                     </View>
-                    <TextInput
-                        style={styles.input}
-                        // onChangeText={}
-                        placeholder='Phone'
-                    />
-                </View>
-
-                <View style={styles.input_holder}>
-                    <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
-                        <UserIcon/>
+                    
+                    <View>
+                        <View style={styles.input_holder}>
+                            <View style={{padding: 5, backgroundColor: '#a9a9a95e' , borderRadius: 999}}>
+                                <UserIcon/>
+                            </View>
+                            <TextInput
+                                style={styles.input}
+                                // onChangeText={}
+                                placeholder='Role'
+                            />
+                        </View>
+                        <Text style={{...styles.error_text, display: 'flex'}}>error hna error !</Text>
                     </View>
-                    <TextInput
-                        style={styles.input}
-                        // onChangeText={}
-                        placeholder='Role'
-                    />
-                </View>
-                
-                <Pressable  style={styles.btn_register}>
-                    <Text style={styles.btn_text} >Register</Text>
-                </Pressable>
 
-                <Text style={styles.bottom_text} >You already have an account ? <Text style={styles.login_link_text} onPress={() => { setFragment('login') }}> Login Now!</Text></Text>
+                    <Pressable  style={styles.btn_register}>
+                        <Text style={styles.btn_text} >Register</Text>
+                    </Pressable>
+
+                    <Text style={styles.bottom_text} >You already have an account ? <Text style={styles.login_link_text} onPress={() => { setFragment('login') }}> Login Now!</Text></Text>
+                </ScrollView>
             </View>
             
         </View>
@@ -174,5 +195,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-SemiBold',
         color: '#C69048',
         marginLeft: 5
+    },
+    error_text: {
+        fontFamily: 'Poppins-Medium',
+        fontSize: 14,
+        paddingTop: 5,
+        color: '#bd1a1a'
     }
 });
