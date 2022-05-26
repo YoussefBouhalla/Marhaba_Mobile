@@ -28,7 +28,10 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-native-svg-uri": "^1.2.3",
     "react-native-web": "0.17.7",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.22"
+    "react-redux": "^8.0.2",
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "redux": "^4.2.0",
+    "expo-secure-store": "~11.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
